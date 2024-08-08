@@ -224,7 +224,7 @@ unset HAVE_SUDO_ACCESS # unset this from the environment
 have_sudo_access() {
   echo "$PASSWORD" | sudo -S mkdir test_folder
 
-  return true
+  return 0
 }
 
 execute() {
