@@ -454,28 +454,6 @@ cd "/usr" || exit 1
 ####################################################################### script
 
 # shellcheck disable=SC2016
-ohai 'Checking for `sudo` access (which may request your password)...'
-
-if [[ -n "${HOMEBREW_ON_MACOS-}" ]]
-then
-  [[ "${EUID:-${UID}}" == "0" ]] || have_sudo_access
-elif ! [[ -w "${HOMEBREW_PREFIX}" ]] &&
-     ! [[ -w "/home/linuxbrew" ]] &&
-     ! [[ -w "/home" ]] &&
-     ! have_sudo_access
-then
-  abort "$(
-    cat <<EOABORT
-Insufficient permissions to install Homebrew to \"${HOMEBREW_PREFIX}\" (the default prefix).
-
-Alternative (unsupported) installation methods are available at:
-https://docs.brew.sh/Installation#alternative-installs
-
-Please note this will require most formula to build from source, a buggy, slow and energy-inefficient experience.
-We will close any issues without response for these unsupported configurations.
-EOABORT
-  )"
-fi
 HOMEBREW_CORE="${HOMEBREW_REPOSITORY}/Library/Taps/homebrew/homebrew-core"
 
 check_run_command_as_root
